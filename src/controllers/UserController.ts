@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import UserService from "../services/UserService";
 import User from "../models/interfaces/User";
+import bcrypt from "bcrypt";
+
 class UserController {
   private userService = new UserService();
   async inscription(req: Request, res: Response) {
@@ -16,6 +18,11 @@ class UserController {
       res.status(400).send({ message: "il manque une info" });
       return;
     }
+    bcrypt.hash(newUser.passord, 10, (err, hash) => {
+      console.log("err", err);
+      console.log("le hash est généré : ", hash);
+      // je doits rester entre ces accolodes//
+    });
   }
 }
 export default UserController;
