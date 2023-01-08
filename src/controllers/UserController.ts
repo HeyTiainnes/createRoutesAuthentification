@@ -11,17 +11,24 @@ class UserController {
     const newUser: User = {
       //structure de l'objet : l'email viendra de req.body.email
       email: req.body.email,
-      passord: req.body.passord,
+      password: req.body.password,
     };
     //on verifie la recuperation
-    if (newUser.email === undefined || newUser.passord === undefined) {
+    if (newUser.email === undefined || newUser.password === undefined) {
       res.status(400).send({ message: "il manque une info" });
       return;
     }
-    bcrypt.hash(newUser.passord, 10, (err, hash) => {
+    bcrypt.hash(newUser.password, 10, async (err, hash) => {
       console.log("err", err);
+
+      // je dois rester entre ces accolodes//
+      // on ecrase le password pour le remplacer par le password hashé
+      console.log("wewUser sans hash :", newUser);
       console.log("le hash est généré : ", hash);
-      // je doits rester entre ces accolodes//
+      newUser.password = hash;
+      console.log("newUser avec hash :", newUser);
+      await this.userService.createUser(newUser);
+      res.status(200).send({ message: "un nouvel utilisateur a été créé " });
     });
   }
 }
