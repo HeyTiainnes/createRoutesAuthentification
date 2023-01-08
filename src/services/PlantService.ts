@@ -1,11 +1,11 @@
-import Book from '../models/interfaces/Book';
+import Plant from '../models/interfaces/Plant';
 import AppDataSource from '../data-source';
-class BookService {
-  async getAll(): Promise<Book[]> {
-    console.log('BookService');
+class PlantService {
+  async getAll(): Promise<Plant[]> {
+    console.log('PlantService');
     // A terme il y aura une Requete vers la BDD qui peut prendre du temps donc Asynchrone
-    return AppDataSource.query('SELECT * FROM book;');
+    return AppDataSource.query('SELECT * FROM plants');
   }
 }
 
-export default BookService;
+export default PlantService;

@@ -1,7 +1,8 @@
 import express from 'express';
 import cors from 'cors';
-import bookRouter from './routes/BookRoutes';
+import plantRouter from './routes/PlantRoutes';
 import AppDataSource from './data-source';
+import userRouter from './routes/UserRoutes';
 
 AppDataSource.initialize()
   .then(() => {
@@ -15,7 +16,8 @@ AppDataSource.initialize()
       })
     ); // on paramètre le fait qu'une appli puisse faire des requête avec ces méthodes référencées
 
-    app.use('/api/plants', bookRouter);
+    app.use('/api/plants', plantRouter);
+    app.use('/api/users', userRouter);
 
     app.listen(process.env.PORT, () => {
       console.log(
