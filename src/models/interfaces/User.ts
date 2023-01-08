@@ -1,10 +1,8 @@
 interface User {
   id?: number;
   email: string;
-  
-  passord: number;
- 
-  
+
+  passord: string;
 }
 
 export default User;
